@@ -16,8 +16,25 @@ const MultiStepForm = () => {
 
   const handleSubmit = async (values: any) => {
     console.log('Formulario completo:', values);
-    // Aquí envías `values` al backend NestJS
-    // fetch('/api/orders', { method: 'POST', body: JSON.stringify(values) })
+    
+    try {
+      const response = await fetch('/api/ordenes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Orden enviada con éxito:', data);
+      } else {
+        console.error('Error al enviar la orden:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error al realizar la petición:', error);
+    }
   };
 
   return (
