@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, InputNumber, Button, Space, Typography, Divider, Table } from 'antd';
+import { Form, Input, InputNumber, Button, Space, Typography, Divider, Table, Popconfirm } from 'antd';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import styles from './StepTwoForm.module.css';
 
@@ -33,7 +33,16 @@ const StepTwoForm: React.FC<StepTwoFormProps> = ({ form }) => {
   }, [packages, form]);
 
   const addPackage = () => {
-    setPackages([...packages, currentPackage]);
+    setPackages([
+      ...packages,
+      {
+        largo: Number(currentPackage.largo), 
+        ancho: Number(currentPackage.ancho), 
+        alto: Number(currentPackage.alto), 
+        peso: Number(currentPackage.peso),  
+        contenido: currentPackage.contenido,
+      },
+    ]);
     resetForm();
   };
 
@@ -47,10 +56,38 @@ const StepTwoForm: React.FC<StepTwoFormProps> = ({ form }) => {
   };
 
   const handleChange = (field: keyof Package, value: any) => {
-    setCurrentPackage({
-      ...currentPackage,
-      [field]: value,
-    });
+
+    if (field === 'contenido') {
+     
+      setCurrentPackage({
+        ...currentPackage,
+        [field]: value,
+      });
+    } else {
+      const numericValue = Number(value);
+      if (isNaN(numericValue)) {
+        return; 
+      }
+      setCurrentPackage({
+        ...currentPackage,
+        [field]: numericValue, 
+      });
+    }
+  };
+
+  const handleTableChange = (value: any, key: string, dataIndex: keyof Package) => {
+    let numericValue = value;
+    if (dataIndex !== 'contenido') {
+      numericValue = Number(value);
+      if (isNaN(numericValue)) {
+        return; 
+      }
+    }
+
+    const updatedPackages = packages.map(pkg =>
+      pkg.contenido === key ? { ...pkg, [dataIndex]: numericValue } : pkg
+    );
+    setPackages(updatedPackages);
   };
 
   const columns = [
@@ -58,12 +95,25 @@ const StepTwoForm: React.FC<StepTwoFormProps> = ({ form }) => {
       title: 'Peso',
       dataIndex: 'peso',
       key: 'peso',
-      render: (peso: number) => <span>{peso} lb</span>,
+      editable: true,
+      render: (peso: number, record: Package) => (
+        <InputNumber
+          defaultValue={peso}
+          onBlur={(e) => handleTableChange(e.target.value, record.contenido, 'peso')}
+        />
+      ),
     },
     {
       title: 'Contenido',
       dataIndex: 'contenido',
       key: 'contenido',
+      editable: true,
+      render: (contenido: string, record: Package) => (
+        <Input
+          defaultValue={contenido}
+          onBlur={(e) => handleTableChange(e.target.value, record.contenido, 'contenido')}
+        />
+      ),
     },
     {
       title: '',
@@ -75,41 +125,77 @@ const StepTwoForm: React.FC<StepTwoFormProps> = ({ form }) => {
       title: 'Largo',
       dataIndex: 'largo',
       key: 'largo',
-      render: (largo: number) => <span>{largo} cm</span>,
+      editable: true,
+      render: (largo: number, record: Package) => (
+        <InputNumber
+          defaultValue={largo}
+          onBlur={(e) => handleTableChange(e.target.value, record.contenido, 'largo')}
+        />
+      ),
     },
     {
       title: 'Alto',
       dataIndex: 'alto',
       key: 'alto',
-      render: (alto: number) => <span>{alto} cm</span>,
+      editable: true,
+      render: (alto: number, record: Package) => (
+        <InputNumber
+          defaultValue={alto}
+          onBlur={(e) => handleTableChange(e.target.value, record.contenido, 'alto')}
+        />
+      ),
     },
     {
       title: 'Ancho',
       dataIndex: 'ancho',
       key: 'ancho',
-      render: (ancho: number) => <span>{ancho} cm</span>,
+      editable: true,
+      render: (ancho: number, record: Package) => (
+        <InputNumber
+          defaultValue={ancho}
+          onBlur={(e) => handleTableChange(e.target.value, record.contenido, 'ancho')}
+        />
+      ),
     },
     {
       title: 'Acción',
       key: 'action',
       render: (_: any, record: Package) => (
-        <Button
-          danger
-          icon={<DeleteOutlined />}
-          onClick={() => removePackage(record.contenido)}  // Usando `contenido` como clave única
-          className={styles.deleteButton}
-        />
+        <Popconfirm
+          title="¿Estás seguro de eliminar este bulto?"
+          onConfirm={() => removePackage(record.contenido)}
+          okText="Sí"
+          cancelText="No"
+        >
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            className={styles.deleteButton}
+          />
+        </Popconfirm>
       ),
     },
   ];
+
+  const mergedColumns = columns.map(col => ({
+    ...col,
+    onCell: (record: Package) => ({
+      record,
+      editable: col.editable,
+      onChange: (value: any) => {
+        if (col.dataIndex) {
+          handleTableChange(value, record.contenido, col.dataIndex as keyof Package);
+        }
+      },
+    }),
+  }));
 
   return (
     <div className={styles.container}>
       <Title level={4} className={styles.title}>Agrega tus bultos</Title>
 
       <div className={styles.packageForm}>
-      <Space className={`${styles.packageRow} packageRowGlobal`}>
-
+        <Space className={`${styles.packageRow} packageRowGlobal`}>
           <div className={styles.boxImageContainer}>
             <img src="/images/Frame.png" alt="Box" className={styles.boxImage} />
           </div>
@@ -171,11 +257,11 @@ const StepTwoForm: React.FC<StepTwoFormProps> = ({ form }) => {
 
       <Divider />
 
-      <Title level={5} className={styles.subtitle}>Lista de bultos</Title>
+      <Title level={5} className={styles.subtitle}>Agrega de bultos</Title>
       <Table
         dataSource={packages}
-        columns={columns}
-        rowKey="contenido" 
+        columns={mergedColumns}
+        rowKey="contenido"
         pagination={false}
       />
 
