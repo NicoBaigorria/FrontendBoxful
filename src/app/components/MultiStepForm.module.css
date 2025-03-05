@@ -1,0 +1,31 @@
+/* MultiStepForm.module.css */
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+  
+  .prevButton {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between text and arrow */
+  }
+  
+  .nextButton {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between text and arrow */
+  }
+  
+  .submitButton {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between text and arrow */
+  }
+  
+  .arrowIcon {
+    width: 16px;
+    height: 16px;
+  }
+  

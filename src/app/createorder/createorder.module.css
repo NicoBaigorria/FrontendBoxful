@@ -1,0 +1,59 @@
+.createOrderContainer {
+    padding: 24px;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px !important;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .createOrderTitle {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d3e50;
+    margin-bottom: 16px;
+  }
+  
+  .createOrderDescription {
+    font-size: 16px;
+    color: #5c6a79;
+    margin-bottom: 24px;
+  }
+  
+  .createOrderButton {
+    background-color: #0052cc;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .createOrderButton:hover {
+    background-color: #003d99;
+  }
+  
+  .multiStepFormWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .createOrderTitle {
+      font-size: 20px;
+    }
+  
+    .createOrderDescription {
+      font-size: 14px;
+    }
+  
+    .createOrderButton {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+  

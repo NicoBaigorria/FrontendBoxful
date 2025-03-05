@@ -1,19 +1,18 @@
-// src/App.tsx
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import CreateOrder from './pages/CreateOrder';
+"use client";
 
-export default function App() {
+import { Button } from 'antd';
+import { useRouter } from 'next/navigation';
+import styles from './Home.module.css'; 
+import Header from './components/Header';
+
+export default function Home() {
+  const router = useRouter();
+
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/create-order" component={CreateOrder} />
-        <Route path="/" component={Login} /> {/* Default to Login if no path matched */}
-      </Switch>
-    </Router>
+    <div className={styles.container}>
+      <Header/>
+      <h1 className={styles.header}>Bienvenido a la webapp de BoxFull del Postulante Nicolás Baigorria</h1>
+      <Button className={styles.button} onClick={() => router.push('/login')}>Ir a Login</Button>
+    </div>
   );
 }

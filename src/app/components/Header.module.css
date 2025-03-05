@@ -1,0 +1,18 @@
+.header {
+    justify-content: center;
+    padding: 16px;
+    background-color: #f7f9fc;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.logo{
+    margin-left: 10px;
+    display: flex;
+}
+
+.logo img:last-child{
+    height: 25px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
