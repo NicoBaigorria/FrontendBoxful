@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'Albert Sans';
+  src: url('/fonts/AlbertSans-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Albert Sans';
+  src: url('/fonts/AlbertSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+.container {
+  padding: 24px;
+  background-color: #f7f9fc;
+  border-radius: 12px;
+  font-family: 'Albert Sans', sans-serif;
+}
+
+.title, .subtitle {
+  margin-bottom: 12px;
+  font-family: 'Albert Sans';
+  color: #7682A0 !important;
+}
+
+.packageForm {
+  background-color: #f1f5f9;
+  padding: 16px;
+  border: 1px solid #dbe2e8;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+
+.packageRow {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.inputNumber, .inputText {
+  flex: 1;
+}
+
+.packagesList {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.packageCard {
+  background-color: #f6ffed;
+  border: 1px solid #a3e635;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.packageField {
+  flex: 1;
+}
+
+.divider {
+  margin: 8px 0;
+}
+
+.deleteButton {
+  align-self: flex-end;
+}
+

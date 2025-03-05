@@ -1,0 +1,69 @@
+.container {
+  background-color: #f7f9fc;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  font-family: 'Albert Sans';
+}
+
+.container label {
+  font-family: 'Albert Sans';
+  color: #7682A0 !important;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.rowWide {
+  display: grid;
+  grid-template-columns: 2fr 1fr; 
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.fullWidth {
+  grid-column: span 3;
+}
+
+.twoColumns {
+  grid-column: span 2;
+}
+
+.label {
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.input, .select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.datePicker {
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.destinationAddressWrapper {
+  display: grid;
+  grid-template-columns: 24px 1fr; 
+  align-items: center;
+  gap: 8px;
+}
+
+.dotImage img {
+  width: 16px; 
+  height: 16px; 
+}

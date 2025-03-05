@@ -1,0 +1,54 @@
+/* LoginRegister.module.css */
+
+/* Container to center the content */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7f7f7;
+  }
+  
+  /* Form container to apply max-width */
+  .formContainer {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Header */
+  .header {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Button for registration and login */
+  .button {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* Modal styles */
+  .modalContent {
+    padding: 20px;
+  }
+  
+  .modalButton {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #1890ff;
+    color: white;
+    border: none;
+  }
+  
+  .modalButton:hover {
+    background-color: #40a9ff;
+  }
+  
